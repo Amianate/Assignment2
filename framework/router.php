@@ -28,7 +28,7 @@ class Router
 $router = new Router();
 
 // Define routes
-$router->addRoute('/hello', );
+$router->addRoute('/hello',);
 
 $router->addRoute('/about');
 
