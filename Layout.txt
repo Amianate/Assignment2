@@ -1,0 +1,17 @@
+Proposed layout for the framework:
+
+/framework
+    /app
+        /controllers
+        /models
+        /views
+    /config
+    /public
+        index.php
+    /vendor
+    /core
+        /Database.php
+        /Router.php
+        /Controller.php
+        /Model.php
+        /View.php
