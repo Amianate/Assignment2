@@ -15,7 +15,7 @@ class Router
     {
         if (isset($this->routes[$path])) {
             $handler = $this->routes[$path];
-            call_user_func($handler);
+            include $handler;
 
         } else {
             // Handle 404 Not Found
@@ -25,16 +25,16 @@ class Router
     }
 }
 
-// Example usage:
 $router = new Router();
 
 // Define routes
-$router->addRoute('/', "indexcontroller.php");
-
+$router->addRoute('/Assignment2', "Assignment2/400003165/app/controller/indexcontroller.php");
 $router->addRoute('/login', "logincontroller.php");
 
 // Get the current request path
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$path = parse_url($_SERVER['REQUEST_URI'])['path'];
+
+echo "this is the path: " . $path . "\n";
 
 // Route the request
 $router->route($path);
