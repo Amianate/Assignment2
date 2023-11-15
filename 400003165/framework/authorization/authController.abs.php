@@ -3,7 +3,7 @@
 abstract class AuthController{
     //sessionController $session = new sessionController();
 
-    function checkEmail(){
+    function checkEmail($email){
 
     }
 

@@ -31,7 +31,7 @@ $router = new Router();
 // Define routes
 $router->addRoute('/', "indexcontroller.php");
 
-$router->addRoute('/login', "lognicontroller.php");
+$router->addRoute('/login', "logincontroller.php");
 
 // Get the current request path
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
