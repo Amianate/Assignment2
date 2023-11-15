@@ -37,4 +37,4 @@ $router->addRoute('/login', "logincontroller.php");
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 // Route the request
-$router->route($method, $path);
+$router->route($path);
