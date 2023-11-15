@@ -16,6 +16,7 @@ class Router
         if (isset($this->routes[$path])) {
             $handler = $this->routes[$path];
             call_user_func($handler);
+
         } else {
             // Handle 404 Not Found
             http_response_code(404);
@@ -28,12 +29,11 @@ class Router
 $router = new Router();
 
 // Define routes
-$router->addRoute('/hello', );
+$router->addRoute('/', "indexcontroller.php");
 
-$router->addRoute('/about');
+$router->addRoute('/login', "lognicontroller.php");
 
-// Get the current request method and path
-$method = $_SERVER['REQUEST_METHOD'];
+// Get the current request path
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 // Route the request
