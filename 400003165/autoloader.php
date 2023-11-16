@@ -1,6 +1,4 @@
 <?php
-echo "\n " . __DIR__ . '/../app/controller';
-
 
 // Register the autoloader
 spl_autoload_register('autoload');
@@ -27,3 +25,4 @@ function autoload($className)
         }
     }
 }
+

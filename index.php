@@ -1,6 +1,6 @@
 <?php
 
-require_once "400003165/framework/router.php";
-// require_once "400003165/framework/autoloader.php";
+require_once "400003165/router.php";
+require_once "400003165/autoloader.php";
 
 // $cont = new indexcontroller();
