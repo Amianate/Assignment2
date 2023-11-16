@@ -1,5 +1,8 @@
 <?php
 
+namespace framework\authorization;
+
+
 abstract class AuthController{
     //sessionController $session = new sessionController();
 

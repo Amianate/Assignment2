@@ -1,5 +1,7 @@
 <?php
 
+namespace framework;
+
 class Response {
     private $statusCode;
     private $headers = [];

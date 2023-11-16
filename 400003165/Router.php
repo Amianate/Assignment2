@@ -1,43 +1,4 @@
 <?php
-// class Router
-// {
-//     private $routes = [];
-
-//     // Add a route and its corresponding handler
-//     public function addRoute( $path, $handler)
-//     {
-//         $this->routes[$path] = $handler;
-//     }
-
-//     // Match the current request to a route and call the handler
-//     public function route($path)
-//     {
-//         if (isset($this->routes[$path])) {
-//             $handler = $this->routes[$path];
-//             echo $handler;
-//             include $handler;
-
-//         } else {
-//             // Handle 404 Not Found
-//             http_response_code(404);
-//             echo "404 Not Found";
-//         }
-//     }
-// }
-
-// $router = new Router();
-
-// // Define routes
-// $router->addRoute('/Assignment2/', "/../app/controller/indexcontroller.php");
-
-// // Get the current request path
-// $path = parse_url($_SERVER['REQUEST_URI'])['path'];
-
-// echo "this is the path: " . $path . "\n";
-
-// // Route the request
-// $router->route($path);
-
 
 class Router {
     private $routes = [];
@@ -71,7 +32,9 @@ class Router {
 
 
                 if (method_exists($instance, $method)) {
+
                     $instance->$method();
+                    
                 } else {echo "Method not found: $method";}
 
             } else {echo "Class not found: $class";}
@@ -85,9 +48,7 @@ class Router {
 $router = new Router();
 
 // Define routes with file, class, and method separated by ':'
-$router->addRoute('/Assignment2/', '400003165/app/controller/indexcontroller.php:indexcontroller:routing');
-// $router->addRoute('/about', 'YourController.php:YourControllerClass:aboutPage');
-// $router->addRoute('/contact', 'YourController.php:YourControllerClass:contactPage');
+$router->addRoute('/Assignment2/', '400003165/app/controller/indexcontroller.php:indexcontroller:redirect');
 
 // Get the current URL (you might need to adjust this based on your environment)
 $currentUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

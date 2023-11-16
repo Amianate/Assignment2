@@ -1,5 +1,7 @@
 <?php
 
+namespace framework;
+
 abstract class sessionController{
     
     function sessionStart() : void {

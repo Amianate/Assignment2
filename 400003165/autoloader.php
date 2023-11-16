@@ -7,7 +7,9 @@ function autoload($className)
 {
     // Define an array of directories to search for the class
     $directories = [
-        __DIR__ . '/../app/controller', // Controller directory
+        __DIR__ . '/', // Root directory
+        __DIR__ . '/app/controller', // Controller directory
+        __DIR__ . '/framework', // Framework directory
     ];
 
     // Convert class name to file path
