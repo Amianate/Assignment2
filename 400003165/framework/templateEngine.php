@@ -21,12 +21,12 @@ class templateEngine{
     }
 }
 
-// Example usage
-$template = "Hello, {{name}}! You are {{age}} years old.";
-$data = [
-    'name' => 'John',
-    'age' => 25
-];
+// // Example usage
+// $template = "Hello, {{name}}! You are {{age}} years old.";
+// $data = [
+//     'name' => 'John',
+//     'age' => 25
+// ];
 
-$engine = new templateEngine($template);
-echo $engine->render($data);
+// $engine = new templateEngine($template);
+// echo $engine->render($data);

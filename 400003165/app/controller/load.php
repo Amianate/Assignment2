@@ -1,6 +1,6 @@
 <?php
 
-namespace root\app\controller;
+namespace app\controller;
 use framework\templateEngine;
 
 require_once __DIR__ . "/../../autoloader.php";

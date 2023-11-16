@@ -29,6 +29,7 @@ class Response {
         }
 
         // Send the response body
-        echo $this->body;
+        // echo $this->body;
+        return $this->body;
     }
 }
