@@ -1,5 +1,7 @@
 <?php
 
+
+require_once __DIR__ . "/config.php";
 require_once __DIR__ . "/../../autoloader.php";
 
 use framework\Response;
@@ -12,10 +14,10 @@ class indexcontroller{
     }
 
     public function redirect(){
-        header("location: /Assignment2/400003165/app/controller/load.php");
+        header("location: " . ROOT . "/app/controller/load.php");
     }
 
-    public function response(){
+    public function getResponse(){
         if($this->authorizeUser()){
 
             $response = new Response();
