@@ -43,4 +43,5 @@ $validationRules = [
     'pw' => ['required', 'min_length'],
 ];
 
+$sess->sessionEnd();
 $validator->validate($dataToValidate, $validationRules);
