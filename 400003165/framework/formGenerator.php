@@ -2,7 +2,7 @@
 
 namespace framework;
 
-class FormGenerator {
+class formGenerator {
     
     public static function openForm($action, $method = 'post') {
         return "<form action=\"$action\" method=\"$method\">";
