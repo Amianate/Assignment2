@@ -1,8 +1,10 @@
 <?php
 
-namespace framework;
+namespace app\controller;
 
-class templateEngine{
+use framework\abstractTemplateEngine;
+
+class templateEngine extends abstractTemplateEngine{
     private $template;
 
     function __construct($newTemplate){

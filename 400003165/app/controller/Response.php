@@ -1,8 +1,10 @@
 <?php
 
-namespace framework;
+namespace app\controller;
 
-class Response {
+use framework\abstractResponse;
+
+class Response extends abstractResponse{
     private $statusCode;
     private $headers = [];
     private $body;

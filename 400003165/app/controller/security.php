@@ -1,6 +1,11 @@
 <?php
 
-class Security{
+namespace app\controller;
+
+// use abstractSecurity;
+use framework\abstractSecurity;
+
+class security extends abstractSecurity{
     public static function generateCsrfToken() {
         $token = bin2hex(random_bytes(32)); // Generate a random token
         $_SESSION['csrf_token'] = $token;
@@ -10,6 +15,5 @@ class Security{
     public static function validateCsrfToken($token) {
         return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
     }
-
     
 }
