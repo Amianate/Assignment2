@@ -14,7 +14,6 @@ $sess->sessionStart();
 // Storing information in the session variables
 
 // Storing the password variable in the session array
-
 if( isset($_REQUEST['username']) ){
     $sess->sessionStore('name', $_REQUEST['username']);
 }
