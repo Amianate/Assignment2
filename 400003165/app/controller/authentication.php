@@ -2,16 +2,16 @@
 
 namespace app\controller;
 
-require_once "/Router.php";
-require_once __DIR__ . "/config.php";
-require_once "../../config/autoloader.php";
+require_once "./Router.php";
+// require_once __DIR__ . "/config.php";
+require_once __DIR__ . '/../../config/autoloader.php';
 
 use app\controller\security;
-use framework\ErrorHandler;
+use app\controller\errorHandler;
 use framework\abstractAuthentication;
 use framework\orm;
 
-$handler = new ErrorHandler();
+$handler = new errorHandler();
 
 class authentication extends abstractAuthentication{
 
@@ -82,25 +82,24 @@ class authentication extends abstractAuthentication{
 
 
     public function loginUser(){
-        $this->sess = new sessionController();
-        $this->sess->sessionStart();
+        sessionController::sessionStart();
 
         //checking the input username/passwords against those in the database
         try{
             if($this->checkEmail()){
                 $result = $this->checkPw(); // Returns an exception if false
-
                 if($result){
                     // If the checks are successful, place the information into the session variables and generate the secirity token
 
-                    $this->sess->sessionStore('id', $result->getId());
-                    $this->sess->sessionStore('username', $result->getUSername());
-                    $this->sess->sessionStore('email', $result->getEmail());
-                    $this->sess->sessionStore('password', $result->getPassword());
-                    $this->sess->sessionStore('role', $result->getRole());
+                    sessionController::sessionStore('id', $result->getId());
+                    sessionController::sessionStore('username', $result->getUSername());
+                    sessionController::sessionStore('email', $result->getEmail());
+                    sessionController::sessionStore('password', $result->getPassword());
+                    sessionController::sessionStore('role', $result->getRole());
 
                     security::generateCsrfToken();
-                    return true;
+
+                    
                 }
             }
             else{
@@ -108,7 +107,7 @@ class authentication extends abstractAuthentication{
             }
         }
         catch(\Exception $e){
-            return $e->getMessage();
+            throw $e;
         }        
     }
 

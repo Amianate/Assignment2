@@ -37,7 +37,6 @@ class formValidator {
     private function validateRequired($fieldName, $value) {
         if (empty($value)) {
             $this->errormsg = $fieldName . " is required.";
-            echo "<br>  Errormsg:" . $this->errormsg;
             return false;
         }
         else{
@@ -48,12 +47,9 @@ class formValidator {
     private function validateEmail($value) {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
             $this->errormsg = "Invalid email format.";
-            echo "<br>  Errormsg:" . $this->errormsg;
-
             return false;
         }
         else{
-            echo "Validate email successful <br>";
             return true;
         }
         
@@ -62,11 +58,9 @@ class formValidator {
     private function validateMinLength($value){
         if( strlen($value) < 8){
             $this->errormsg = "ERROR: The password is not long enough.";
-            echo "<br> Errormsg:" . $this->errormsg;
             return false;
         }
         else{
-            echo "Validate minlength successful <br>";
             return true;
         }
     }

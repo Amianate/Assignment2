@@ -2,7 +2,8 @@
 
 namespace framework;
 
-class ErrorHandler {
+abstract class abstractErrorHandler {
+    
     public static function handleException(\Exception $e) {
         // Log the exception
         echo "Error: " . $e->getMessage(); 
@@ -11,7 +12,7 @@ class ErrorHandler {
         http_response_code(500);
     }
 
-    public static function handle404() {
+    abstract public static function loginException(\Exception $e);
 
-    }
+    abstract public static function handle404();
 }

@@ -3,9 +3,9 @@
 namespace framework;
 use PDO;
 use Exception;
-use controller\user;
+// use framework\user;
 
-require_once __DIR__ . "/../../autoloader.php";
+require_once __DIR__ . "/../config/autoloader.php";
 
 class orm{
 
@@ -21,8 +21,6 @@ class orm{
 
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            echo "Database Connected successfully";
         } 
         catch(Exception $e) {
             throw $e;
@@ -67,29 +65,21 @@ class orm{
 
     // Functions for checking if something is in the db
     public function isInDb($field, $data){
-        $queryString = "SELECT * FROM `users` WHERE :field = ':data'";
-        
+        $queryString = "SELECT * FROM `users` WHERE $field = :data";
+    
         $query = $this->conn->prepare($queryString);
-        $query->bindParam(':field', $field);
         $query->bindParam(':data', $data);
-
+    
         $query->execute();
-
+    
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
-        if( sizeof($result) > 0 ){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return sizeof($result) > 0;
     }
 
     public function doubleIsInDb($field1, $field2, $data1, $data2){
-        $queryString = "SELECT * FROM `users` WHERE :field1 = ':data1' AND :field2 = ':data2' ";
+        $queryString = "SELECT * FROM `users` WHERE $field1 = ':data1' AND $field2 = ':data2' ";
         $query = $this->conn->prepare($queryString);
 
-        $query->bindParam(':field1', $field1);
-        $query->bindParam(':field2', $field2);
         $query->bindParam(':data1', $data1);
         $query->bindParam(':data2', $data2);
 
@@ -105,31 +95,29 @@ class orm{
     }
 
 
-    public function searchDb($field, $data){
-        $queryString = "SELECT * FROM `users` WHERE :field = ':data'";
-        $query = $this->conn->prepare($queryString);
+    public function searchDb($field, $data)
+{
+    $queryString = "SELECT * FROM `users` WHERE $field = :data";
+    $query = $this->conn->prepare($queryString);
 
-        $query->bindParam(':field', $field);
-        $query->bindParam(':data', $data);
+    $query->bindParam(':data', $data);
 
-        $query->execute();
+    $query->execute();
 
-        $array = array();
+    $array = array();
 
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        if(sizeof($result) > 0){
-            
-            foreach($result as $row){
-                $user = new user($row['username'], $row['email'], $row['password'], $row['role'], $row['id'],);
-                array_push($array, $user);
-            }
-            return $array;
+    if (sizeof($result) > 0) {
+        foreach ($result as $row) {
+            $user = new user($row['username'], $row['email'], $row['password'], $row['role'], $row['id']);
+            array_push($array, $user);
         }
-        else{
-            throw new \Exception("Result not found");
-        }
+        return $array;
+    } else {
+        throw new \Exception("Result not found");
     }
+}
 
 
     public function doubleSearchDb($field1, $field2, $data1, $data2){

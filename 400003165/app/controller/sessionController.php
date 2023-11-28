@@ -9,19 +9,19 @@ require_once __DIR__ . '/../../config/autoloader.php';
 
 class sessionController extends abstractSession{
     
-    function sessionStart() : void {
+    public static function  sessionStart() : void {
 
         if(session_status() != PHP_SESSION_ACTIVE){
             session_start();
         }
     }
 
-    function sessionEnd() : void {
+    public static function sessionEnd() : void {
         session_unset();
         session_abort();
     }
 
-    function getSessionValue($key) {
+    public static function getSessionValue($key) {
         if(session_status() != PHP_SESSION_ACTIVE){
             throw new \Exception("The session is not active."); // To be changed to session exception later (maybe)
         }
@@ -34,8 +34,14 @@ class sessionController extends abstractSession{
         }
     }
 
-    public function sessionStore($key, $value){
+    public static function sessionStore($key, $value){
         $_SESSION[$key] = $value; 
+    }
+
+    public static function sessionDelete($key){
+        if(isset($_SESSION[$key])){
+            unset($_SESSION[$key]);
+        }
     }
 
 

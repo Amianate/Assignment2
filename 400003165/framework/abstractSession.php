@@ -4,14 +4,14 @@ namespace framework;
 
 abstract class abstractSession{
     
-    function sessionStart() : void {
+    public static function sessionStart() : void {
 
         if(session_status() != PHP_SESSION_ACTIVE){
             session_start();
         }
     }
 
-    function sessionEnd() : void {
+    public static function sessionEnd() : void {
         session_unset();
         session_abort();
     }

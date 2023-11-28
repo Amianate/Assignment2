@@ -34,4 +34,15 @@ class Response extends abstractResponse{
         echo $this->body;
         // return $this->body;
     }
+
+    public function redirect(string $url, int $statusCode = 302)
+    {
+        $this->setStatusCode($statusCode);
+        $this->addHeader('Location', $url);
+        $this->setBody("");
+
+        // Send the redirect response
+        $this->send();
+        exit();
+    }
 }
