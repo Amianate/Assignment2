@@ -1,10 +1,9 @@
 <?php
-
 namespace app\controller;
 
-require_once __DIR__ . "/../../autoloader.php";
+require_once __DIR__ . '/../../config/autoloader.php';
 
-use abstractRouter;
+use framework\abstractRouter;
 
 class Router extends abstractRouter{
     private $routes = [];
@@ -13,9 +12,9 @@ class Router extends abstractRouter{
     function __construct()
     {
         // Define routes with file, class, and method separated by ':'
-        $this->addRoute('/Assignment2/', '400003165/app/controller/indexcontroller.php:indexcontroller:loadLogin');
-        $this->addRoute('/Assignment2/400003165/', '400003165/app/controller/indexcontroller.php:indexcontroller:loadLogin');
-        $this->addRoute('/Assignment2/400003165/app/', '400003165/app/controller/indexcontroller.php:indexcontroller:loadLogin');
+        $this->addRoute('/Assignment2/', 'indexcontroller.php');
+        // $this->addRoute('/Assignment2/400003165/', '400003165/app/controller/indexcontroller.php:indexcontroller:loadLogin');
+        // $this->addRoute('/Assignment2/400003165/app/', '400003165/app/controller/indexcontroller.php:indexcontroller:loadLogin');
         $this->addRoute('/Assignment2/400003165/app/controller/', 'indexcontroller.php');
     }
     // Add a new route
@@ -65,11 +64,7 @@ class Router extends abstractRouter{
             // It's a PHP file
             include $handlerInfo;
         }
-
-
     }
-
-
 }
 
 ?>

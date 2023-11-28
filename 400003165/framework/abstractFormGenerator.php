@@ -2,7 +2,7 @@
 
 namespace framework;
 
-class formGenerator {
+abstract class abstractFormGenerator {
     
     public static function openForm($action, $method = 'post') {
         return "<form action=\"$action\" method=\"$method\">";
@@ -12,12 +12,7 @@ class formGenerator {
         return "</form>";
     }
 
-    public static function generateInput($name, $label, $type = 'text', $value = '', $placeholder = '') {
-        return "
-            <label for=\"$name\">$label:</label>
-            <input type=\"$type\" name=\"$name\" id=\"$name\" value=\"$value\" placeholder=\"$placeholder\">
-        ";
-    }
+    public static abstract function generateInput($name, $label, $type = 'text', $value = '', $placeholder = '');
 
     public static function generateTextarea($name, $label, $value = '', $placeholder = '') {
         return "

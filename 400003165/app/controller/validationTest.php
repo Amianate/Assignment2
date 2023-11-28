@@ -3,9 +3,8 @@
 
 namespace app\controller;
 use framework\formValidator;
-use framework\sessionController;
 
-require_once __DIR__ . "/../../autoloader.php";
+require_once "./autoloader.php";
 
 $validator = new formValidator();
 $sess = new sessionController();

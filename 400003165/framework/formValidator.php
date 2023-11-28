@@ -3,8 +3,7 @@
 namespace framework;
 
 class formValidator {
-
-    private $errors = [];
+    private $errormsg;
 
     public function validate($data, $rules) { // Accepts an array of rules, and one of the data to be validated
         foreach ($rules as $fieldName => $fieldRules) { // Looks at each rule key value pair as field name and rules respectively
@@ -12,25 +11,24 @@ class formValidator {
             $value = isset($data[$fieldName]) ? $data[$fieldName] : null; // Sets the value as the data for the fieldname in question, if it is set
 
             foreach ($fieldRules as $rule) {
-                $this->validateRule($fieldName, $value, $rule);
+                if ($this->validateRule($fieldName, $value, $rule) == false){
+                    return $this->errormsg;
+                };
             }
+            return true;
         }
-
-        return empty($this->errors);
     }
 
     private function validateRule($fieldName, $value, $rule) {
         switch ($rule) { // Calls different functions based on the validation rule
             case 'required':
-                $this->validateRequired($fieldName, $value);
+                return $this->validateRequired($fieldName, $value);
                 break;
             case 'email':
-                $this->validateEmail($fieldName, $value);
+                return $this->validateEmail($value);
                 break;
             case 'min_length':
-                $this->validateMinLength($value);
-            // Add more validation rules as needed
-            // Example: 'min_length', 'max_length', 'numeric', etc.
+                return $this->validateMinLength($value);
         }
     }
 
@@ -38,36 +36,38 @@ class formValidator {
 
     private function validateRequired($fieldName, $value) {
         if (empty($value)) {
-            echo 'Field is required.';
-            $this->addError($fieldName, 'Field is required.');
+            $this->errormsg = $fieldName . " is required.";
+            echo "<br>  Errormsg:" . $this->errormsg;
+            return false;
         }
         else{
-            echo "Validate required successful <br>";
+            return true;
         }
     }
 
-    private function validateEmail($fieldName, $value) {
+    private function validateEmail($value) {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            echo 'Invalid email format.';
-            $this->addError($fieldName, 'Invalid email format.');
+            $this->errormsg = "Invalid email format.";
+            echo "<br>  Errormsg:" . $this->errormsg;
+
+            return false;
+        }
+        else{
+            echo "Validate email successful <br>";
+            return true;
         }
         
     }
 
     private function validateMinLength($value){
         if( strlen($value) < 8){
-            echo "ERROR: The password is not long enough.";
+            $this->errormsg = "ERROR: The password is not long enough.";
+            echo "<br> Errormsg:" . $this->errormsg;
+            return false;
         }
         else{
             echo "Validate minlength successful <br>";
+            return true;
         }
-    }
-
-    private function addError($fieldName, $message) {
-        $this->errors[$fieldName][] = $message;
-    }
-
-    public function getErrors() {
-        return $this->errors;
     }
 }

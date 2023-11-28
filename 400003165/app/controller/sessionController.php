@@ -1,8 +1,13 @@
 <?php
 
-namespace framework;
+namespace app\controller;
+use framework\abstractSession;
 
-class sessionController{
+
+require_once __DIR__ . "/../../config/config.php";
+require_once __DIR__ . '/../../config/autoloader.php';
+
+class sessionController extends abstractSession{
     
     function sessionStart() : void {
 
@@ -25,7 +30,7 @@ class sessionController{
             return $_SESSION[$key];
         }
         else{
-            return "The session variable is not set.";
+            return null;
         }
     }
 

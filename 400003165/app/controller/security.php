@@ -6,6 +6,7 @@ namespace app\controller;
 use framework\abstractSecurity;
 
 class security extends abstractSecurity{
+    
     public static function generateCsrfToken() {
         $token = bin2hex(random_bytes(32)); // Generate a random token
         $_SESSION['csrf_token'] = $token;

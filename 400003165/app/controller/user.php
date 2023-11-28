@@ -1,6 +1,6 @@
 <?php
 
-namespace framework\ORM;
+namespace app\controller;
 
 class user{
     private $id;
