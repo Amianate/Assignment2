@@ -17,26 +17,29 @@ require_once __DIR__ . '/../../config/autoloader.php';
 $sess = new sessionController();
 $sess->sessionStart();
 
+sessionController::sessionEnd();
+sessionController::sessionStart();
+require_once __DIR__ . "/../../app/view/login.php";
 
 if(isset($_SESSION["username"])){ 
     // If the user is logged in
-    $response = new Response();
-    $response->setStatusCode(200);
-    $response->addHeader("content-type", "text/html");
-    $response->setBody($page);
-    $role = $_SESSION['role'];
+    // $response = new Response();
+    // $response->setStatusCode(200);
+    // $response->addHeader("content-type", "text/html");
+    // $response->setBody($page);
+    // $role = $_SESSION['role'];
 
-    switch ($role) {
-        case 'Research Group Manager':
+    // switch ($role) {
+    //     case 'Research Group Manager':
             
-            break;
-        case 'Research Study Manager':
-            # code...
-            break;        
-        default:
-            # code...
-            break;
-    }
+    //         break;
+    //     case 'Research Study Manager':
+    //         # code...
+    //         break;        
+    //     default:
+    //         # code...
+    //         break;
+    // }
 
 }
 else{ // Reload the login page if user is not logged in / Login is unsuccessful

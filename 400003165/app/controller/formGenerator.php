@@ -38,20 +38,23 @@ class formGenerator {
         ";
     }
 
-    public static function generateSelect($name, $label, $options = [], $selected = '') {
-        $selectOptions = '';
-        foreach ($options as $value => $text) {
-            $isSelected = ($value == $selected) ? 'selected' : '';
-            $selectOptions .= "<option value=\"$value\" $isSelected>$text</option>";
-        }
+    public static function generateDropdown($name, $label, $options = [], $selected = '', $attributes = [])
+{
+    $labelString = self::generateAttributeString($attributes);
+    $selectOptions = '';
 
-        return "
-            <label for=\"$name\">$label:</label>
-            <select name=\"$name\" id=\"$name\">
-                $selectOptions
-            </select>
-        ";
+    foreach ($options as $value => $text) {
+        $isSelected = ($value == $selected) ? 'selected' : '';
+        $selectOptions .= "<option value=\"$value\" $isSelected>$text</option>";
     }
+
+    return "
+        <label for=\"$name\" {$labelString} class=\"labels\">$label:</label>
+        <select name=\"$name\" id=\"$name\">
+            $selectOptions
+        </select>
+    ";
+}
 
     // ******* Functions for normal tags ******* // 
 

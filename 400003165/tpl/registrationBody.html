@@ -1,0 +1,54 @@
+
+<body>
+    <div id="box">
+        <form action="{{action}}" method="post">
+            <div class="regisForm">
+
+                <h1 class="title">User Registration</h1>
+
+                <!-- Where errors with inserting the user are displayed  -->
+                <p id="loginErr" class="errMessages">
+                    {{entryErrors}}
+                </p>
+
+                <!-- Username field and label -->
+                <label for="usernameField" class="labels">Username</label>
+                <input type="text" id="username" name="usernameField" class="inputs" required>
+
+                <!-- Looking for error message and printing it if found -->
+                <p id="nameErr" class="errMessages">
+                    {{nameErrors}}
+                </p>
+
+                <!-- Email field and label -->
+                <label for="emailField" class="labels">Email</label>
+                <input type="text" id="email" name="emailField" class="inputs" required>
+
+                <!-- Looking for error message and printing it if found -->
+                <p id="emailErr" class="errMessages">
+                    {{emailErrors}}
+                </p>
+
+                <!-- Password field and label -->
+                <label for="pwField" class="labels">Password</label>
+                <input type="password" id="pw" name="pwField" class="inputs" required>
+
+                <!-- Looking for error message and printing it if found -->
+                <p id="pwErr">
+                    {{pwErrors}}
+                </p>
+
+                <input type="submit" value="Register" id="regisButton">
+
+                
+                <div></div>
+                <div></div>
+
+                <p id="regisLink">Have an account? <br> <a href="login.php">Log in</a></p>
+
+            </div>
+        </form>
+    </div>
+</body>
+
+<html>

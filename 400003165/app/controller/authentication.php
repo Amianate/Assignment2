@@ -79,7 +79,7 @@ class authentication extends abstractAuthentication{
         
     }
 
-
+    
 
     public function loginUser(){
         sessionController::sessionStart();
@@ -97,9 +97,7 @@ class authentication extends abstractAuthentication{
                     sessionController::sessionStore('password', $result->getPassword());
                     sessionController::sessionStore('role', $result->getRole());
 
-                    security::generateCsrfToken();
-
-                    
+                    security::generateCsrfToken();                    
                 }
             }
             else{

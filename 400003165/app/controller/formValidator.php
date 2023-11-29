@@ -1,6 +1,8 @@
 <?php
 
-namespace framework;
+namespace app\controller;
+
+require_once __DIR__ . "/../../config/config.php";
 
 class formValidator {
     private $errormsg;
@@ -29,12 +31,18 @@ class formValidator {
                 break;
             case 'min_length':
                 return $this->validateMinLength($value);
+                break;
+            case 'upper':
+                return $this->validateUpperCase($value);
+                break;
+            case 'digit':
+                return $this->validateDigit($value);
         }
     }
 
     // **** VALIDATION FUNCTIONS **** //
 
-    private function validateRequired($fieldName, $value) {
+    public function validateRequired($fieldName, $value) {
         if (empty($value)) {
             $this->errormsg = $fieldName . " is required.";
             return false;
@@ -44,7 +52,7 @@ class formValidator {
         }
     }
 
-    private function validateEmail($value) {
+    public function validateEmail($value) {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
             $this->errormsg = "Invalid email format.";
             return false;
@@ -55,13 +63,34 @@ class formValidator {
         
     }
 
-    private function validateMinLength($value){
-        if( strlen($value) < 8){
-            $this->errormsg = "ERROR: The password is not long enough.";
+    public function validateMinLength($value){
+        if( strlen($value) < MIN_LENGTH){
+            $this->errormsg = "The password is not long enough.";
             return false;
         }
         else{
             return true;
         }
+    }
+
+    public function validateUpperCase($value){
+        for($x = 0; $x < strlen($value); $x++){
+            if( ctype_upper($value[$x]) ){
+                return true;
+            }
+        } 
+
+        $this->errormsg = "The password must contain at least one capital letter.";
+        return false; // Returning false if no characters are uppercase
+    }
+
+    public function validateDigit($value){
+        for($x = 0; $x < strlen($value); $x++){
+            if( ctype_digit($value[$x]) ){
+                return true;
+            }
+        } 
+        $this->errormsg = "The password must contain at least one digit.";
+        return false;
     }
 }

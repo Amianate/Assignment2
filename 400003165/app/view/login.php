@@ -2,9 +2,7 @@
 
 namespace app\view;
 
-// use framework\ErrorHandler;
 use app\controller\templateEngine;
-// use controller\security;
 use app\controller\Response;
 use app\controller\sessionController;
 use app\controller\formGenerator;
@@ -49,7 +47,7 @@ require_once __DIR__ . '/../../config/autoloader.php';
     $form .= formGenerator::closeTag("div"); // closing div
 
     $form .= formGenerator::openTag("p", ["id" => "regisLink"]); // Opening p
-    $form .= formGenerator::openTag("a", ["href" => "nothing.php"]); // Opening a
+    $form .= formGenerator::openTag("a", ["href" => "/Assignment2/400003165/app/view/registration.php"]); // Opening a
     $form .= "Register";
     $form .= formGenerator::closeTag("a"); // closing a
     $form .= formGenerator::closeTag("p"); // closing p
@@ -71,7 +69,7 @@ require_once __DIR__ . '/../../config/autoloader.php';
 
     $engine = new templateEngine($page);
 
-    // Preparing the response object if the user is not signed  in    
+    // Preparing the response object 
     $response = new Response();
     $response->setStatusCode(200);
     $response->addHeader("content-type", "text/html");

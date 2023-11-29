@@ -2,6 +2,7 @@
 
 namespace app\controller;
 use framework\abstractErrorHandler;
+use app\controller\sessionController;
 
 class errorHandler extends abstractErrorHandler{
     
@@ -14,10 +15,13 @@ class errorHandler extends abstractErrorHandler{
     }
 
     public static function loginException(\Exception $e){
-        $sess = new sessionController();
-        $sess->sessionStart();
+        sessionController::sessionStart();
+        sessionController::sessionStore("error", $e->getMessage());
+    }
 
-        $sess->sessionStore("error", $e->getMessage());
+    public static function registrationException($field, $e){
+        sessionController::sessionStart();
+        sessionController::sessionMultiStore("errors", $field, $e->getMessage());
     }
 
     public static function handle404(){

@@ -5,11 +5,43 @@ namespace app\view;
 use app\controller\templateEngine;
 use app\controller\Response;
 use app\controller\sessionController;
+use app\controller\security;
+
 
 require_once __DIR__ . "/../../config/config.php";
 require_once __DIR__ . '/../../config/autoloader.php';
 
 sessionController::sessionStart();
+
+echo security::validateCsrfToken($_SESSION['csrf_token']);
+
+if( security::validateCsrfToken($_SESSION['csrf_token']) == false ){
+    // Redirect to the login page
+    $response = new Response();
+    $response->redirect("../view/login.php", 301);
+    exit();
+};
+
+
+$role = sessionController::getSessionValue("role");
+if(sessionController::getSessionValue("role") != "Researcher"){
+    switch ($role) {
+        case 'Research Group Manager': 
+            $response = new Response();
+            $response->redirect("../view/gmDash.php", 301);
+            exit();
+
+            break;
+        case 'Research Study Manager':
+            $response = new Response();
+            $response->redirect("../view/gmDash.php", 301);
+            exit();
+
+            break;     
+    }
+}
+
+
 
 $page = file_get_contents(__DIR__ . "/../../tpl/resDashboard.html");
 

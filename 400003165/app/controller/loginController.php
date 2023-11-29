@@ -6,7 +6,7 @@ require_once "Router.php";
 require_once __DIR__ . "/../../config/config.php";
 require_once __DIR__ . '/../../config/autoloader.php';
 
-use framework\formValidator;
+use app\controller\formValidator;
 use app\controller\errorHandler;
 use app\controller\Response;
 use framework\user;
@@ -68,8 +68,9 @@ try {
     // Carrying the user to the dashboard after successful login
     sessionController::sessionStart();
 
-    switch (sessionController::getSessionValue("role")) {
-        case 'researcher':
+    $role = sessionController::getSessionValue("role");
+    switch ($role) {
+        case 'Researcher':
             $response = new Response();
             $response->redirect("../view/resDash.php", 301);
             exit();
@@ -91,11 +92,6 @@ try {
             # code...
             break;
     }
-    $response = new Response();
-    $page = file_get_contents(__DIR__ . "../../tpl/login.html");
-    $response->setStatusCode(200);
-    $response->addHeader("content-type", "text/html");
-    $response->setBody($page);
 
 } catch (\Exception $e) {    
     errorHandler::loginException($e);

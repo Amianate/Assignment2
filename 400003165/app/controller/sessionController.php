@@ -34,8 +34,25 @@ class sessionController extends abstractSession{
         }
     }
 
+    public static function getSessionMultiValue($key1, $key2) {
+        if(session_status() != PHP_SESSION_ACTIVE){
+            throw new \Exception("The session is not active."); // To be changed to session exception later (maybe)
+        }
+
+        if(isset($_SESSION[$key1][$key2])){
+            return $_SESSION[$key1][$key2];
+        }
+        else{
+            return null;
+        }
+    }
+
     public static function sessionStore($key, $value){
         $_SESSION[$key] = $value; 
+    }
+
+    public static function sessionMultiStore($key1, $key2, $value){
+        $_SESSION[$key1][$key2] = $value; 
     }
 
     public static function sessionDelete($key){
